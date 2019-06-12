@@ -4,8 +4,31 @@
 #include <vector>
 using namespace std;
 
+template <class Reader> void readingMethod(string file, Reader r){
+        size_t pos = 0;
+    string line;
+    ifstream myfile (file);
+    if (myfile.is_open())
+    {
+        while ( getline (myfile,line) )
+        {
+            int a, b;
+            myfile >> a >> b;
+        }
+        myfile.close();
+    }
+
+    else cout << "Unable to open file";
+
+}
+
 
 int main () {
+    bool hashTableΕxistence = false;
+    bool avlTreeΕxistence = false;
+    bool maxHeapExistence = false;
+    bool MinHeapΕxistence = false;
+    bool graphΕxistence = false;
     string STRING;
     ifstream infile;
     infile.open ("commands.txt");
@@ -24,7 +47,8 @@ int main () {
         line.push_back(STRING);
         string command = line[0] + " " +  line [1];
         if (command == "BUILD MINHEAP"){
-            cout << "1\n";
+            string fileToRead = line[3];
+
         }else if(command == "BUILD MAXHEAP"){
 
         }else if(command == "BUILD AVLTREE"){
@@ -77,8 +101,12 @@ int main () {
 
         }else if(command == "DELETEMIN GRAPH"){
 
-        }
+        }else if(command == "DELETEMIN HASHTABLE"){
 
+        } else{
+            cout << "Not matching command\n";
+            continue;
+        }
     }
     infile.close();
 

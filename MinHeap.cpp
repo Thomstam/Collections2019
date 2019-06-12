@@ -143,8 +143,7 @@ void MinHeap::DELETEMIN() {
         int smallest = current;
         if ((current * 2 + 1) < data.size() && data[current * 2 + 1] < data[smallest]) {
             smallest = current * 2 + 1;
-        }
-        if ((current * 2 + 2) < data.size() && data[current * 2 + 2] < data[smallest]) {
+        }        if ((current * 2 + 2) < data.size() && data[current * 2 + 2] < data[smallest]) {
             smallest = current * 2 + 2;
         }
         if (current != smallest) {
