@@ -2,10 +2,14 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "AvlTree.h"
+#include "MaxHeap.h"
+#include "MinHeap.h"
+#include "Hashtable.h"
 using namespace std;
 
-template <class Reader> void readingMethod(string file, Reader r){
-        size_t pos = 0;
+template <class Reader> void static readingMethod(string file, Reader r){
+    size_t pos = 0;
     string line;
     ifstream myfile (file);
     if (myfile.is_open())
@@ -27,8 +31,9 @@ int main () {
     bool hashTableExistence = false;
     bool avlTreeExistence = false;
     bool maxHeapExistence = false;
-    bool MinHeapExistence = false;
+    bool minHeapExistence = false;
     bool graphExistence = false;
+
     string STRING;
     ifstream infile;
     infile.open ("commands.txt");
@@ -48,11 +53,11 @@ int main () {
         string command = line[0] + " " +  line [1];
         if (command == "BUILD MINHEAP"){
             string fileToRead = line[3];
-
         }else if(command == "BUILD MAXHEAP"){
 
         }else if(command == "BUILD AVLTREE"){
-
+            string fileToRead = line[3];
+            AvlTree avl;
         }else if(command == "BUILD GRAPH"){
 
         }else if(command == "BUILD HASHTABLE"){
