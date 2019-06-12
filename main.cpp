@@ -24,11 +24,11 @@ template <class Reader> void readingMethod(string file, Reader r){
 
 
 int main () {
-    bool hashTableΕxistence = false;
-    bool avlTreeΕxistence = false;
+    bool hashTableExistence = false;
+    bool avlTreeExistence = false;
     bool maxHeapExistence = false;
-    bool MinHeapΕxistence = false;
-    bool graphΕxistence = false;
+    bool MinHeapExistence = false;
+    bool graphExistence = false;
     string STRING;
     ifstream infile;
     infile.open ("commands.txt");
