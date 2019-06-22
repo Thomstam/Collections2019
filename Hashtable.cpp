@@ -26,7 +26,6 @@ HashTable::HashTable(int x, string file) {
         }
         myFileToRead.close();
     }
-    else cout << "Unable to open file";
     auto stop = std::chrono::steady_clock::now();
     auto ftime = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
     myFileToWrite.open("output.txt", std::ios::out | std::ios::app);
@@ -114,7 +113,7 @@ void HashTable::search(int value){
 
 void HashTable::getSize() {
     myFileToWrite.open("output.txt", std::ios::out | std::ios::app);
-    myFileToWrite << "The size of HashTable: "<< table2->size() << "\n\n";
+    myFileToWrite << "The size of HashTable : "<< table2->size() << "\n\n";
     myFileToWrite.flush();
     myFileToWrite.close();
 }
