@@ -2,20 +2,42 @@
 // Created by Thomas on 5/21/2019.
 //
 
-#include <commctrl.h>
-#include "AvlTree.h"
+
+#include "TestAvl.h"
 using namespace std;
 
-unsigned char AvlTree:: height(node* p){
+AvlTree::AvlTree() = default;
+
+AvlTree::AvlTree(string file, nodeTest* p) {
+    nodeTest *root = NULL;
+    string line;
+    ifstream myFileToRead (file);
+    if (myFileToRead.is_open())
+    {
+        while ( getline (myFileToRead,line) )
+        {
+            int a;
+            myFileToRead >> a;
+            root= insertItemForConstractor(root,a);
+        }
+        myFileToRead.close();
+
+    }
+    else {
+        cout << "Unable to open file";
+    }
+}
+
+unsigned char AvlTree:: height(nodeTest* p){
     return p ? p->height : 0;
 }
 
-node* AvlTree:: findMin(node* p) // find a node with minimal key in a p tree
+nodeTest* AvlTree:: findMin(nodeTest* p) // find a node with minimal key in a p tree
 {
     return p->left?findMin(p->left):p;
 }
 
-void AvlTree:: fixHeight(node* p){
+void AvlTree:: fixHeight(nodeTest* p){
     unsigned char heightL = height(p->left);
     unsigned char heightR = height(p->right);
     if ( heightL > heightR ) {
@@ -25,12 +47,12 @@ void AvlTree:: fixHeight(node* p){
     }
 }
 
-int AvlTree:: bFactor(node* p){
+int AvlTree:: bFactor(nodeTest* p){
     return height(p->right)-height(p->left);
 }
 
-node* AvlTree:: rotateLeft(node* q){ // the left rotation round q
-    node* p = q->right;
+nodeTest* AvlTree:: rotateLeft(nodeTest* q){ // the left rotation round q
+    nodeTest* p = q->right;
     q->right = p->left;
     p->left = q;
     fixHeight(q);
@@ -38,8 +60,8 @@ node* AvlTree:: rotateLeft(node* q){ // the left rotation round q
     return p;
 }
 
-node* AvlTree:: rotateRight(node* p){ // the right rotation round p
-    node* q = p->left;
+nodeTest* AvlTree:: rotateRight(nodeTest* p){ // the right rotation round p
+    nodeTest* q = p->left;
     p->left = q->right;
     q->right = p;
     fixHeight(p);
@@ -47,7 +69,7 @@ node* AvlTree:: rotateRight(node* p){ // the right rotation round p
     return q;
 }
 
-node* AvlTree:: balance(node *p){
+nodeTest* AvlTree:: balance(nodeTest *p){
     fixHeight(p);
     if(bFactor(p) == 2){
         if (bFactor(p-> right) < 0){
@@ -64,19 +86,19 @@ node* AvlTree:: balance(node *p){
     return p;
 }
 
-node * AvlTree:: insert(node* p,int val){
+nodeTest * AvlTree:: insertItemForConstractor(nodeTest* p,int val){
     if(!p){
-        return  new node(val);
+        return  new nodeTest(val);
     }
     if( val < p->value){
-        p-> left = insert(p->left, val);
-    } else{
-        p-> right = insert(p-> right, val);
+        p-> left = insertItemForConstractor(p->left, val);
+    } else if (val > p->value){
+        p-> right = insertItemForConstractor(p-> right, val);
     }
     return balance(p);
 }
 
-node* AvlTree:: removeMin(node* p){
+nodeTest* AvlTree:: removeMin(nodeTest* p){
     if ( p->left == 0){
         return p-> right;
     }
@@ -84,20 +106,20 @@ node* AvlTree:: removeMin(node* p){
     return balance(p);
 }
 
-node* AvlTree:: remove(node* p, int val){
+nodeTest* AvlTree:: remove(nodeTest* p, int val){
     if(!p) return 0;
     if(val < p-> value){
         p->left = remove(p->left, val);
     } else if(val > p-> value){
         p->right = remove(p->right, val);
     } else {
-        node* q = p->left;
-        node* r = p->right;
+        nodeTest* q = p->left;
+        nodeTest* r = p->right;
         delete p;
         if (!r){
             return q;
         }
-        node* min = findMin(r);
+        nodeTest* min = findMin(r);
         min->right = removeMin(r);
         min->left = q;
         return balance(p);

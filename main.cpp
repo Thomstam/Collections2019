@@ -2,14 +2,16 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "AvlTree.h"
 #include "MaxHeap.h"
 #include "MinHeap.h"
 #include "Hashtable.h"
+#include "bstree.h"
+#include "TestAvl.h"
+
+
 using namespace std;
 
 template <class Reader> void static readingMethod(string file, Reader r){
-    size_t pos = 0;
     string line;
     ifstream myfile (file);
     if (myfile.is_open())
@@ -36,6 +38,12 @@ int main () {
     bool maxHeapExistence = false;
     bool minHeapExistence = false;
     bool graphExistence = false;
+
+    HashTable hashTable;
+    bstree bst;
+    nodeptr root;
+    root = NULL;
+
     string STRING;
     ifstream infile;
     infile.open ("commands.txt");
@@ -59,10 +67,25 @@ int main () {
             maxHeapExistence = true;
         }else if(command == "BUILD AVLTREE"){
             avlTreeExistence = true;
+            string myLineToRead;
+            ifstream myfile (line[2]);
+            if (myfile.is_open())
+            {
+                while ( getline (myfile,myLineToRead) )
+                {
+//            int a, b;
+//            myfile >> a >> b;
+                    int a;
+                    myfile >> a;
+                    bst.insert(a,root);
+                }
+                myfile.close();
+            }
         }else if(command == "BUILD GRAPH"){
             graphExistence = true;
         }else if(command == "BUILD HASHTABLE"){
             hashTableExistence = true;
+            hashTable = HashTable(1,line[2]);
         }else if(command == "GETSIZE MINHEAP"){
             if(minHeapExistence){
 
@@ -89,7 +112,7 @@ int main () {
             }
         }else if(command == "GETSIZE HASHTABLE"){
             if(hashTableExistence){
-
+                hashTable.getSize();
             }else{
                 cout << "unable to execute GETSIZE HASHTABLE" << endl;
             }
@@ -107,7 +130,6 @@ int main () {
             }
         }else if(command == "FINDMIN AVLTREE"){
             if(avlTreeExistence){
-
             }else{
                 cout << "unable to execute FINDMIN AVLTREE" << endl;
             }
@@ -119,7 +141,8 @@ int main () {
             }
         }else if(command == "SEARCH HASHTABLE"){
             if(hashTableExistence){
-
+                int x = stoi(line[2]);
+                hashTable.search(x);
             }else{
                 cout << "unable to execute SEARCH HASHTABLE" << endl;
             }
@@ -161,7 +184,8 @@ int main () {
             }
         }else if(command == "INSERT HASHTABLE"){
             if(hashTableExistence){
-
+                int x = stoi(line[2]);
+                hashTable.insertItem(x);
             }else{
                 cout << "unable to execute INSERT HASHTABLE" << endl;
             }
@@ -177,27 +201,28 @@ int main () {
             }else{
                 cout << "unable to execute DELETEMIN MINHEAP" << endl;
             }
-        }else if(command == "DELETEMIN MAXHEAP"){
+        }else if(command == "DELETEMAX MAXHEAP"){
             if(maxHeapExistence){
 
             }else{
                 cout << "unable to execute DELETEMIN MAXHEAP" << endl;
             }
-        }else if(command == "DELETEMIN AVLTREE"){
+        }else if(command == "DELETE AVLTREE"){
             if(avlTreeExistence){
 
             }else{
                 cout << "unable to execute DELETEMIN AVLTREE" << endl;
             }
-        }else if(command == "DELETEMIN GRAPH"){
+        }else if(command == "DELETE GRAPH"){
             if(graphExistence){
 
             }else{
                 cout << "unable to execute DELETEMIN GRAPH" << endl;
             }
-        }else if(command == "DELETEMIN HASHTABLE"){
+        }else if(command == "DELETE HASHTABLE"){
             if(hashTableExistence){
-
+                int x = stoi(line[2]);
+                hashTable.deleteItem(x);
             }else{
                 cout << "unable to execute DELETEMIN HASHTABLE" << endl;
             }
