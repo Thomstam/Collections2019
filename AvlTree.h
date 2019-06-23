@@ -31,7 +31,6 @@ class AvlTree
 
 public:
     AvlTree();
-    AvlTree(string file, node* p);
     unsigned char height(node* p);
     int bFactor(node *p);
     void fixHeight(node* p);

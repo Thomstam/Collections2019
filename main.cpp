@@ -5,7 +5,6 @@
 #include "MaxHeap.h"
 #include "MinHeap.h"
 #include "Hashtable.h"
-#include "bstree.h"
 #include "AvlTree.h"
 
 
@@ -161,7 +160,6 @@ int main () {
             if (avlTreeExistence) {
                 auto start = std::chrono::steady_clock::now();
                 int x = stoi(lineFromCommandsToStore[2]);
-                node *temp = nullptr;
                 if (testAvl.remove(treeNode,x) != nullptr) {
                     auto stop = std::chrono::steady_clock::now();
                     auto ftime = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();

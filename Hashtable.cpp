@@ -26,6 +26,8 @@ HashTable::HashTable(int x, string file) {
         }
         myFileToRead.close();
     }
+    sort( table2->begin(), table2->end());
+    table2->erase( unique( table2->begin(), table2->end() ), table2->end() );
     auto stop = std::chrono::steady_clock::now();
     auto ftime = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
     myFileToWrite.open("output.txt", std::ios::out | std::ios::app);
@@ -40,6 +42,8 @@ void HashTable::insertItem(int value){
     auto start = std::chrono::steady_clock::now();
     int index = hashFunction(value);
     table2[index].push_back(value);
+    sort( table2->begin(), table2->end());
+    table2->erase( unique( table2->begin(), table2->end() ), table2->end() );
     auto stop = std::chrono::steady_clock::now();
     auto ftime = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
     myFileToWrite.open("output.txt", std::ios::out | std::ios::app);
