@@ -2,15 +2,14 @@
 
 using namespace std::chrono;
 
-
-
-MinHeap::MinHeap() {
+MinHeap::MinHeap() = default;
+MinHeap::MinHeap(string filename) {
 
     auto start = steady_clock::now();
 
     int val;
     std::ifstream ifile;
-    ifile.open("a.txt");
+    ifile.open(filename);
     std::ofstream ofile;
     ofile.open("output.txt", std::ios::out | std::ios::app);
 

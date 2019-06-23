@@ -7,11 +7,14 @@
 #include <iterator>
 #include <chrono>
 #include <tgmath.h>
+#include <string>
 
+using namespace std;
 class MinHeap {
 
 public:
     MinHeap();
+    MinHeap(string);
     void GETSIZE();
     void INSERT(int);
     void FINDMIN();
