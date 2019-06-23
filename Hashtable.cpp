@@ -1,7 +1,3 @@
-//
-// Created by Thomas on 5/21/2019.
-//
-
 #include "Hashtable.h"
 using namespace std;
 
