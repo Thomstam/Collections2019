@@ -2,13 +2,14 @@
 
 using namespace std::chrono;
 
-MaxHeap::MaxHeap() {
+MaxHeap::MaxHeap() = default;
+MaxHeap::MaxHeap(string filename) {
 
     auto start = steady_clock::now();
 
     int val;
     std::ifstream ifile;
-    ifile.open("a.txt");
+    ifile.open(filename);
     std::ofstream ofile;
     ofile.open("output.txt", std::ios::out | std::ios::app);
 
